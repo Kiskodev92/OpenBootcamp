@@ -5,6 +5,6 @@ button.boton::before {
     background-color: green;
     color: white;
 }
-.boton::shadow {
+.boton:hover:before {
     content: '¡Hecho!'
 }
