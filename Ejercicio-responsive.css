@@ -1,0 +1,16 @@
+.contenedor {
+    pad: 0.25rem;
+    background-color: yellow;
+    margin: 10px;
+    border: 1px solid aquamarine;
+    display: flex;
+    gap: 0.5rem;
+    min-height: 5rem;
+    justify-content: flex-start;
+    align-items: center;
+}
+.item {
+        justify-content: space-evenly
+}
+@media (max-width: 640px){
+}
