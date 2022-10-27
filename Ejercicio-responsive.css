@@ -1,16 +1,26 @@
-.contenedor {
-    pad: 0.25rem;
-    background-color: yellow;
-    margin: 10px;
-    border: 1px solid aquamarine;
+body {
+    min-width: 100vw;
+    min-height: 100vh;
     display: flex;
-    gap: 0.5rem;
-    min-height: 5rem;
-    justify-content: flex-start;
-    align-items: center;
+    font-size: 2rem;
 }
-.item {
-        justify-content: space-evenly
+.contenedor {
+    background-color: grey;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
 }
-@media (max-width: 640px){
+.main {
+    padding: 10px;
+    flex-grow: 1;
+}
+@media (max-width: 640px) {
+    body{
+        flex-direction: column-reverse;
+    }
+    .main {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
 }
