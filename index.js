@@ -1,35 +1,48 @@
-const parrafos= document.querySelectorAll(".parrafo")
+let marker, map;
 
-const secciones= document.querySelector(".seccion")
+function initMap () {
+  //console.log("Inicializando mapa")
+  const position= {
+    lat: -25.363,
+    lng: 131.044
+  }
 
-parrafos.forEach(parrafo => {
-    parrafo.addEventListener("dragstart", Event => {
-        console.log("estoy arrastrando el párrafo" + parrafo.innerText)
-        parrafo.classList.add("dragging")
-        event.dataTransfer.setData("id", parrafo.id)
-        const elemento_fantasma= document.querySelector(".imagen-fantasma")
-        event.dataTransfer.setDragImage(elemento_fantasma, 0, 0)
-    })
+  const map= new google.maps.Map(document.getElementById("map"),{
+    zoom: 4,
+    center:posicion
+  })
 
-    parrafo.addEventListener("dragend", ()=> {
-        //console.log("Ya he terminado de arrastrar")
-        parrafo.classList.remove("dragging")
-    })
-})
+  const marker= new google.map.Marker({
+    position: posicion,
+    map,
+    tittle: "posicion inicial"
+  })
 
-secciones.forEach(seccion =>{
-    seccion.addEventListener ("dragover", event=>{
-        event.preventDefault()
-        event.dataTransfer.dropEffect="move"
-        //console.log("drag over")
-        //
-    })
+  //Obtener la geolocalizacion
+  //marker.setPosition({lat, lng})
+  geoPosiciona()
+}
 
-    seccion.addEventListener("drop", event => {
-        console.log("Drop")
-        const id_parrafo=event.dataTransfer.getData("id")
-        //console.log("párrafo id: ", id_parrafo)
-        const parrafo= document.getElementById(id_parrafo)
-        seccion.appendChild(parrafo)
-    })
-})
+function geoPosiciona() {
+  if (navigator.geolocation){
+  const geoLoc = navigator.geolocation
+  const options= {timeout: 60000}
+  const wahtPos= geoLoc.watchPosition(centraMapa, onError, options)
+  } else {
+    alert("tu navegador no admite geolocalizacion")
+  }
+}
+
+function centraMapa (position) {
+  const nuevaPos= {
+    lar:position.coords.latitude,
+    lng:position.coords.longitude
+  }
+  console.log(nuevaPos)
+  marker.setPosition({lat, lng})
+  map.setCenter(nuevaPos)
+}
+function onError(error) {
+  console.log("se ha producido un error y lo hemos gestionado")
+  console.error(error)
+}
